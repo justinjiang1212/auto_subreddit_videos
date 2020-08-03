@@ -15,8 +15,6 @@ def scrape_subreddit(reddit, url, comment_threshold):
     if top_level_comment.score > comment_threshold:
         top_comment = top_level_comment.body.replace('\n', ' ')
         top_comment = top_comment.replace('\t', ' ')
-        #top_comment = top_comment.replace('.', ' ')
-        top_comment = top_comment.replace('-', ' ')
         top_comments.append((top_comment, "https://www.reddit.com" + top_level_comment.permalink))
         top_links.append("https://www.reddit.com" + top_level_comment.permalink)
   
