@@ -1,0 +1,7 @@
+# ignore all logs
+*.log
+*__pycache__
+*.png
+*.mp3
+*.pyc
+*.DS_Store

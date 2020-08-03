@@ -13,16 +13,18 @@ reddit = praw.Reddit(client_id='dwiIzGyzmAcWuQ',
                      username='Able-Faithlessness44',
                     password = '12Ctyisawesome!')
 
-url = 'https://www.reddit.com/r/AskReddit/comments/h9gc8e/anyone_who_has_taken_part_in_judge_judy_either_as'
+url = 'https://www.reddit.com/r/AskReddit/comments/i1sh57/what_is_the_greatest_comeback_to_a_insult_youve/'
 
-top_comments, top_links = utils.scrape_subreddit(reddit, url, 1000)
+top_comments, top_links = utils.scrape_subreddit(reddit, url, 5000)
 
-print(len(top_comments))
-print(top_links)
+print(str(len(top_comments)) + " comments to be processed")
 
-
-#global text-to-speech declaration
+#global text-to-speech declaration using Mac OS speech driver 'nsss'
 engine = pyttsx3.init(driverName='nsss')
+
+#slow down rate of speech to 185 words per minute
+rate = engine.getProperty('rate')
+engine.setProperty('rate', rate-15)
 engine.startLoop(False)
 
 output_dir = 'output'
