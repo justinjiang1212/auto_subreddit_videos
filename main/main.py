@@ -24,14 +24,14 @@ engine = pyttsx3.init(driverName='nsss')
 
 #slow down rate of speech to 185 words per minute
 rate = engine.getProperty('rate')
-engine.setProperty('rate', rate-15)
+engine.setProperty('rate', rate-25)
 engine.startLoop(False)
 
 output_dir = 'output'
 if os.path.exists(output_dir):
     shutil.rmtree(output_dir)
 os.makedirs(output_dir)
-
+os.makedirs(output_dir + "/mp3")
 counter = 0
 for comment in top_comments:
   utils.text_to_audio(engine, comment[0], counter, output_dir)
