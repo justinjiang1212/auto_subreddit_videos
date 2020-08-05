@@ -6,13 +6,13 @@ These videos are hard to produce by hand: one must go on a subreddit and find ac
 ## Version 1.0.0, August 4th, 2020
 Our first version lacks many of the bells and whistles promised above, and there is still much manual work to be done.
 
-What it can do: 
-Produce screenshots of reddit comments (the screenshots have a white background and are not cropped)
-Produce .mp3 files with audio from a speech engine reading each comment
+**What it can do:**  
+Produce screenshots of reddit comments (the screenshots have a white background and are not cropped)<br/>
+Produce .mp3 files with audio from a speech engine reading each comment<br/>
 
-What it can't do (future versions will have these as features):
-Crop the screenshot of the comment so that only the comment is visible
-Turn the background of the comment to dark gray to make the video look better
-Output a video
+**What it _can't_ do** (future versions will have these as features):  
+Crop the screenshot of the comment so that only the comment is visible<br/>
+Turn the background of the comment to dark gray to make the video look better<br/>
+Output a video<br/>
 
 
