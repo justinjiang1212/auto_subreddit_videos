@@ -4,7 +4,7 @@ The goal of this project is to automate the labor-intensive process of video pro
 These videos are hard to produce by hand: one must go on a subreddit and find acceptable comments, screenshot them, turn the text into speech, then put it all into a video editor. I wanted to leverage the power of python (and its many packages) to automate this process. The final goal is to have a program in which you input a link to a subreddit, and the program spits out a video. Below is a version log that will track my development of this project.
 
 ## Version 1.0.0, August 4th, 2020
-Our first version lacks many of the bells and whistles promised above, and there is still much manual work to be done.
+Our first version lacks many of the bells and whistles promised above, and there is still much manual work to be done. This is the first [video](https://youtu.be/ZdxreABoeK4) produced with this program.
 
 **What it can do:**  
 Produce screenshots of reddit comments (the screenshots have a white background and are not cropped)<br/>
