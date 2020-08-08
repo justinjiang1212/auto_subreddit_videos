@@ -34,6 +34,17 @@ os.makedirs(output_dir)
 os.makedirs(output_dir + "/mp3")
 counter = 0
 for comment in top_comments:
-  utils.text_to_audio(engine, comment[0], counter, output_dir)
+  #utils.text_to_audio(engine, comment[0], counter, output_dir)
   utils.screenshot(comment[1], counter, output_dir)
+
+  filename = str(counter) + "-full.png"
+  filepath = "output/" + filename
+
+  im_crop = utils.crop_to_bottom(filepath)
+  os.remove(filepath)
+  bottom = utils.find_bottom_of_comment(im_crop)
+  final_crop = utils.crop_to_comment(im_crop, bottom)
+  final_black = utils.change_background(final_crop)
+  final = utils.normalize(final_black)
+  final.save(filepath)
   counter += 1
