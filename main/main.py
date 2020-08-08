@@ -14,7 +14,7 @@ reddit = praw.Reddit(client_id=ai.client_id,
 
 url = 'https://www.reddit.com/r/AskReddit/comments/i1sh57/what_is_the_greatest_comeback_to_a_insult_youve/'
 
-top_comments, top_links = utils.scrape_subreddit(reddit, url, 5000)
+top_comments, title = utils.scrape_subreddit(reddit, url, 5000)
 
 print(str(len(top_comments)) + " comments to be processed")
 
@@ -31,12 +31,24 @@ output_dir = 'output'
 if os.path.exists(output_dir):
     shutil.rmtree(output_dir)
 os.makedirs(output_dir)
-os.makedirs(output_dir + "/mp3")
-counter = 0
+os.makedirs(output_dir + "/wav")
+
+utils.screenshot(title[1], 'title', output_dir)
+filename = 'title' + "-full.png"
+filepath = "output/" + filename
+title_crop = utils.crop_to_bottom(filepath, is_title=True)
+os.remove(filepath)
+title_black = utils.change_background(title_crop)
+final_title = utils.normalize(title_black)
+final_title.save(filepath)
+
+
+counter = 0             #counter is just a filename
 for comment in top_comments:
-  #utils.text_to_audio(engine, comment[0], counter, output_dir)
+  utils.text_to_audio(engine, comment[0], counter, output_dir)
   utils.screenshot(comment[1], counter, output_dir)
 
+  #screenshot function adds -full.png to each screenshot, redundancy is unavoidable :( 
   filename = str(counter) + "-full.png"
   filepath = "output/" + filename
 

@@ -9,9 +9,7 @@ def scrape_subreddit(reddit, url, comment_threshold):
   remove_chars = ['\n', '\t', '.', '!', '-', '?', ';', ':', '[', ']', '(', ')', '*']
   submission = reddit.submission(url=url)
   top_comments = []
-  top_links = []
-  #top_comments.append((submission.selftext ,submission.permalink))
-  #top_comments.append((submission.title, submission.permalink))
+  title = (submission.title, "https://www.reddit.com" + submission.permalink)
   submission.comments.replace_more(limit=0)
   for top_level_comment in submission.comments:
     if top_level_comment.score > comment_threshold:
@@ -19,14 +17,11 @@ def scrape_subreddit(reddit, url, comment_threshold):
         for char in remove_chars:
           top_comment = top_comment.replace(char, ' ')
         top_comments.append((top_comment, "https://www.reddit.com" + top_level_comment.permalink))
-        top_links.append("https://www.reddit.com" + top_level_comment.permalink)
-  
-
-  return top_comments, top_links
+  return top_comments, title
 
 def text_to_audio(engine, text, author, output_dir):
   filename = str(author) + ".wav"
-  filepath = output_dir + "/mp3/" + filename
+  filepath = output_dir + "/wav/" + filename
   engine.connect('starting', save_audio(engine, text, filepath))
 
 
@@ -34,13 +29,16 @@ def save_audio(engine, text, filepath):
   engine.save_to_file(text, filepath)
   engine.iterate()
 
-def screenshot(url_to_comment, counter, output_dir):
-  command = "webkit2png -F  -o " + output_dir + "/" + str(counter) + " " + url_to_comment
+def screenshot(url_to_comment, filename, output_dir):
+  command = "webkit2png -F  -o " + output_dir + "/" + str(filename) + " " + url_to_comment
   os.system(command)
 
-def crop_to_bottom(filepath):
+def crop_to_bottom(filepath, is_title = False):
   im = Image.open(filepath)
-  im_crop = im.crop((122, 440, 676, 955)) #magic numbers for bottom of comment, needs to be found manually
+  if is_title:
+    im_crop = im.crop((111, 151, 740, 330)) #magic numbers for title crop
+  else:
+    im_crop = im.crop((122, 440, 676, 955)) #magic numbers for bottom of comment, needs to be found manually
   return im_crop
 
 def find_bottom_of_comment(im_crop):
@@ -69,6 +67,7 @@ def change_background(final_crop):
   return final_transparent_image
 
 def normalize(final_black):
+  final_black = resize(final_black, 1.5)
   old_size = final_black.size
   new_size = (1280, 720)        #720p in YouTube standards
   normal_im = Image.new("RGB", new_size) 
@@ -77,3 +76,17 @@ def normalize(final_black):
   normal_im.paste(final_black, (new_x, new_y))
 
   return normal_im
+
+def resize(im, factor):
+  width = im.size[0] * 2
+  height = im.size[1] * 2
+  im = im.resize((width, height), Image.ANTIALIAS)
+  return im
+
+def make_video():
+
+
+  audio_clip = AudioFileClip('output/wav/0.wav')
+  image_clip = ImageClip("output/0-full.png")
+
+  clip = image_clip.set_audio(audio_clip)
