@@ -14,7 +14,8 @@ reddit = praw.Reddit(client_id=ai.client_id,
 
 url = 'https://www.reddit.com/r/AskReddit/comments/i5zi1i/men_and_women_of_reddit_who_caught_their/'
 
-top_comments, title = utils.scrape_subreddit(reddit, url, 5000)
+top_comments, title = utils.scrape_subreddit(reddit, url, comment_threshold=2000,\
+                                            max_comment_length=1500)
 
 print(str(len(top_comments)) + " comments to be processed")
 
@@ -42,7 +43,6 @@ os.remove(filepath)
 title_black = utils.change_background(title_crop)
 final_title = utils.normalize(title_black)
 final_title.save(filepath)
-
 
 counter = 0             #counter is just a filename
 for comment in top_comments:
