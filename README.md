@@ -12,16 +12,14 @@ Added clip of the channel logo along with static audio, which emuluates other po
 Increased bitrate of videos to be 720p-quality on YouTube.
 
 ## Version 2.0.0, August 8th, 2020
-Video production is fully automated. Here is our [first video](https://www.youtube.com/watch?v=9PalHFOIp-U&feature=youtu.be) produced using this code.
+Video production is fully automated. Here is the [first video](https://www.youtube.com/watch?v=9PalHFOIp-U&feature=youtu.be) produced using this version of the code.
 
 ## Version 1.5.0, August 7th, 2020
 Screenshots are now cropped with colors inverted. Before this feature was implemented, we had to crop each screenshot by hand, which was extremely time-consuming and honestly a complete waste of time. Below is an example of before and after. <br/>
-
-**Old** <br/>
-![old](https://github.com/justinjiang1212/auto_subreddit_videos/blob/master/samples/old.png)
-
 **New** <br/>
 ![new](https://github.com/justinjiang1212/auto_subreddit_videos/blob/master/samples/new.png)
+**Old** <br/>
+![old](https://github.com/justinjiang1212/auto_subreddit_videos/blob/master/samples/old.png)
 
 ## Version 1.0.0, August 4th, 2020
 Our first version lacks many of the bells and whistles promised above, and there is still much manual work to be done. This is the first [video](https://youtu.be/ZdxreABoeK4) produced with this program.
