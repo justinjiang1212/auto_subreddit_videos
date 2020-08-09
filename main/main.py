@@ -12,10 +12,10 @@ reddit = praw.Reddit(client_id=ai.client_id,
                      username=ai.username,
                     password =ai.password)
 
-url = 'https://www.reddit.com/r/AskReddit/comments/i5zi1i/men_and_women_of_reddit_who_caught_their/'
+url = 'https://www.reddit.com/r/AskReddit/comments/i6jf2s/redditors_who_have_been_in_such_severe_and/'
 
-top_comments, title = utils.scrape_subreddit(reddit, url, comment_threshold=2000,\
-                                            max_comment_length=1500)
+top_comments, title = utils.scrape_subreddit(reddit, url, comment_threshold=100,\
+                                            max_comment_length=30000)
 
 print(str(len(top_comments)) + " comments to be processed")
 
@@ -25,6 +25,11 @@ engine = pyttsx3.init(driverName='nsss')
 
 #slow down rate of speech to 185 words per minute
 rate = engine.getProperty('rate')
+
+# set to Alex for male voice, Samantha for female voice
+voices = ['com.apple.speech.synthesis.voice.Alex', 'com.apple.speech.synthesis.voice.samantha']
+engine.setProperty('voice', voices[0])
+
 engine.setProperty('rate', rate-25)
 engine.startLoop(False)
 
@@ -54,6 +59,8 @@ for comment in top_comments:
   filepath = "output/" + filename
 
   im_crop = utils.crop_to_bottom(filepath)
+  # Uncomment to debug if screenshots are not being cropped correctly
+  #im_crop.show()
   os.remove(filepath)
   bottom = utils.find_bottom_of_comment(im_crop)
   final_crop = utils.crop_to_comment(im_crop, bottom)
@@ -61,5 +68,13 @@ for comment in top_comments:
   final = utils.normalize(final_black)
   final.save(filepath)
   counter += 1
+  
+  # Uncomment to debug if screenshots are not being cropped correctly
+  #break
 
-utils.make_video(counter)
+control = input("Ready to start video production? (y/n) ")
+
+if control == 'y':
+  utils.make_video(counter)
+else:
+  print("When you are ready, you can run make_videos with counter = " + str(counter))

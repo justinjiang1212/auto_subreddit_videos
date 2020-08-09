@@ -9,7 +9,7 @@ def scrape_subreddit(reddit, url, comment_threshold, max_comment_length):
   remove_chars = ['\n', '\t', '.', '!', '-', '?', ';', ':', '[', ']', '(', ')', '*', '~', '#', '^']
   submission = reddit.submission(url=url)
   top_comments = []
-  title = (submission.title, 'https://www.reddit.com' + submission.permalink)
+  title = (submission.title + submission.selftext, 'https://www.reddit.com' + submission.permalink)
   submission.comments.replace_more(limit=0)
   for top_level_comment in submission.comments:
     if top_level_comment.score > comment_threshold:
@@ -24,39 +24,52 @@ def scrape_subreddit(reddit, url, comment_threshold, max_comment_length):
 def text_to_audio(engine, text, author, output_dir):
   filename = str(author) + '.wav'
   filepath = output_dir + '/wav/' + filename
-  engine.connect('starting', save_audio(engine, text, filepath))
+  engine.connect('starting', _save_audio(engine, text, filepath))
 
 
-def save_audio(engine, text, filepath):
+def _save_audio(engine, text, filepath):
   engine.save_to_file(text, filepath)
   engine.iterate()
+
 
 def screenshot(url_to_comment, filename, output_dir):
   command = 'webkit2png -F  -o ' + output_dir + '/' + str(filename) + ' ' + url_to_comment
   os.system(command)
 
+
 def crop_to_bottom(filepath, is_title = False):
   im = Image.open(filepath)
   if is_title:
-    im_crop = im.crop((111, 151, 740, 330)) # Magic numbers for title crop
+    # Magic numbers for title crop
+    im_crop = im.crop((111, 151, 740, 330))
   else:
-    im_crop = im.crop((122, 440, 676, 955)) # Magic numbers for bottom of comment, needs to be found manually
+    # Magic numbers for bottom of comment, needs to be found manually
+    im_crop = im.crop((122, 440, 676, 955))
   return im_crop
+
 
 def find_bottom_of_comment(im_crop):
   pixels = im_crop.load()
-  bottom = 0                    # y-cord of bottom of comment
-  # Magic number may need to be adjusted
+  # y-cord of bottom of comment
+  bottom = 0
+  # Magic number in range may need to be adjusted
   for j in range(30, im_crop.size[1]):
     pixel = pixels[1, j]
-    #if pixels[1, j] != (245, 245, 246, 255) or pixels[1, j] != (245, 245, 245, 255):
-    if pixel[0] != 245:
+
+    # Uncomment to debug if screenshots are not being cropped correctly
+    #print(pixel)
+    #print(bottom)
+
+    if pixel[0] != 245:       # This value is usually 245, but it is sometimes 253
       bottom = j
       return bottom
 
+
 def crop_to_comment(im_crop, bottom):
-  if bottom % 2 == 1:                           # Make dimensions even
+  # Make dimensions even
+  if bottom % 2 == 1:
     bottom += 1
+  # Crop photo to bottom box of comment
   final_crop = im_crop.crop((0, 0, im_crop.size[0], bottom))
   return final_crop
 
@@ -69,9 +82,12 @@ def change_background(final_crop):
   return final_transparent_image
 
 def normalize(final_black):
-  final_black = resize(final_black, 1.5)
+  final_black = _resize(final_black, 1.5)
   old_size = final_black.size
-  new_size = (1280, 720)        # 720p in YouTube standards
+
+  # 720p in YouTube standards
+  new_size = (1280, 720)
+
   normal_im = Image.new('RGB', new_size) 
   new_x = int((new_size[0]-old_size[0])/2)
   new_y = int((new_size[1]-old_size[1])/2)
@@ -79,7 +95,7 @@ def normalize(final_black):
 
   return normal_im
 
-def resize(im, factor):
+def _resize(im, factor):
   width = int(im.size[0] * factor)
   height = int(im.size[1] * factor)
   im = im.resize((width, height), Image.ANTIALIAS)
@@ -94,6 +110,9 @@ def make_video(counter):
   clip = title_image.set_audio(title_audio)
   clips.append(clip)
 
+  static = _get_static()
+  clips.append(static)
+
   for i in range(0, counter):
     audio_path = 'output/wav/' + str(i) + '.wav'
     audio_clip = AudioFileClip(audio_path)
@@ -106,8 +125,37 @@ def make_video(counter):
 
       clip = image_clip.set_audio(audio_clip)
       clips.append(clip)
+      clips.append(static)
     except:
       print("image missing")
 
   final_clip = concatenate_videoclips(clips)
-  final_clip.write_videofile("output/video.mp4", fps = 30, codec = "mpeg4", remove_temp = False)
+  final_clip.write_videofile("output/video.mp4", fps = 30, codec = "mpeg4", remove_temp = True, bitrate = '7000k')
+
+def _get_static():
+    static_audio = AudioFileClip('logo/static.wav')
+    duration = static_audio.duration
+
+    logo = ImageClip('logo/break.png', duration = duration)
+    logo = logo.set_fps(30)
+    
+    logo_clip = logo.set_audio(static_audio)
+    logo_clip = logo_clip.volumex(0.5)
+    return logo_clip
+  
+
+
+def _print_all_voices():
+  '''Prints all possible voices in the speech engine'''
+  engine = pyttsx3.init()
+
+  voices = engine.getProperty('voices')
+  for voice in voices:
+      print("Voice:")
+      print(" - ID: %s" % voice.id)
+      print(" - Name: %s" % voice.name)
+      print(" - Languages: %s" % voice.languages)
+      print(" - Gender: %s" % voice.gender)
+      print(" - Age: %s" % voice.age)
+
+
