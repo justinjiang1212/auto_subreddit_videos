@@ -5,7 +5,7 @@ These videos are hard to produce by hand: one must go on a subreddit and find ac
 
 
 
-## Version 2.1.0, August 9th, 2020
+## Version 2.5.0, August 9th, 2020
 Added clip of the channel logo along with static audio, which emuluates other popular channels who have done the same thing.
 
 ## Version 2.1.0, August 9th, 2020
@@ -15,7 +15,13 @@ Increased bitrate of videos to be 720p-quality on YouTube.
 Video production is fully automated. Here is our [first video](https://www.youtube.com/watch?v=9PalHFOIp-U&feature=youtu.be) produced using this code.
 
 ## Version 1.5.0, August 7th, 2020
-Screenshots are now cropped with colors inverted. Below is an example.
+Screenshots are now cropped with colors inverted. Before this feature was implemented, we had to crop each screenshot by hand, which was extremely time-consuming and honestly a complete waste of time. Below is an example of before and after. <br/>
+
+**Old** <br/>
+![old](https://github.com/justinjiang1212/auto_subreddit_videos/blob/master/samples/old.png)
+
+**New** <br/>
+![new](https://github.com/justinjiang1212/auto_subreddit_videos/blob/master/samples/new.png)
 
 ## Version 1.0.0, August 4th, 2020
 Our first version lacks many of the bells and whistles promised above, and there is still much manual work to be done. This is the first [video](https://youtu.be/ZdxreABoeK4) produced with this program.
@@ -30,3 +36,5 @@ Turn the background of the comment to dark gray to make the video look better<br
 Output a video<br/>
 
 
+## Authors
+Justin Jiang, Harvey Mudd College 2023
