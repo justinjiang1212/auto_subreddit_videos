@@ -3,6 +3,20 @@ The goal of this project is to automate the labor-intensive process of video pro
 
 These videos are hard to produce by hand: one must go on a subreddit and find acceptable comments, screenshot them, turn the text into speech, then put it all into a video editor. I wanted to leverage the power of python (and its many packages) to automate this process. The final goal is to have a program in which you input a link to a subreddit, and the program spits out a video. Below is a version log that will track my development of this project.
 
+
+
+## Version 2.1.0, August 9th, 2020
+Added clip of the channel logo along with static audio, which emuluates other popular channels who have done the same thing.
+
+## Version 2.1.0, August 9th, 2020
+Increased bitrate of videos to be 720p-quality on YouTube.
+
+## Version 2.0.0, August 8th, 2020
+Video production is fully automated. Here is our [first video](https://www.youtube.com/watch?v=9PalHFOIp-U&feature=youtu.be) produced using this code.
+
+## Version 1.5.0, August 7th, 2020
+Screenshots are now cropped with colors inverted. Below is an example.
+
 ## Version 1.0.0, August 4th, 2020
 Our first version lacks many of the bells and whistles promised above, and there is still much manual work to be done. This is the first [video](https://youtu.be/ZdxreABoeK4) produced with this program.
 
