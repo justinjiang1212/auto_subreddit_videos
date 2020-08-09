@@ -12,7 +12,7 @@ reddit = praw.Reddit(client_id=ai.client_id,
                      username=ai.username,
                     password =ai.password)
 
-url = 'https://www.reddit.com/r/AskReddit/comments/i1sh57/what_is_the_greatest_comeback_to_a_insult_youve/'
+url = 'https://www.reddit.com/r/AskReddit/comments/i5zi1i/men_and_women_of_reddit_who_caught_their/'
 
 top_comments, title = utils.scrape_subreddit(reddit, url, 5000)
 
@@ -33,6 +33,7 @@ if os.path.exists(output_dir):
 os.makedirs(output_dir)
 os.makedirs(output_dir + "/wav")
 
+utils.text_to_audio(engine, title[0], 'title', output_dir)
 utils.screenshot(title[1], 'title', output_dir)
 filename = 'title' + "-full.png"
 filepath = "output/" + filename
@@ -60,3 +61,5 @@ for comment in top_comments:
   final = utils.normalize(final_black)
   final.save(filepath)
   counter += 1
+
+utils.make_video(counter)
