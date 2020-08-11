@@ -6,7 +6,7 @@ These videos are hard to produce by hand: one must go on a subreddit and find ac
 
 
 ## Version 2.5.0, August 9th, 2020
-Added clip of the channel logo along with static audio, which emuluates other popular channels who have done the same thing.
+Added clip of the channel logo along with static audio, which emuluates other popular channels who have done the same thing. [Example video](https://youtu.be/jadPcYGxwhk)
 
 ## Version 2.1.0, August 9th, 2020
 Increased bitrate of videos to be 720p-quality on YouTube.
