@@ -6,6 +6,7 @@ import shutil
 from main import account_info as ai
 from params import *
 import sys
+from optparse import OptionParser
 
 def main(url: str, comment_threshold: int = 100, max_comment_length: int = 30000, output: str = 'output'):
     '''Wrapper function to create video from subreddit comments
