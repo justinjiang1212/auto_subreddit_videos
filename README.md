@@ -3,7 +3,8 @@ The goal of this project is to automate the labor-intensive process of video pro
 
 These videos are hard to produce by hand: one must go on a subreddit and find acceptable comments, screenshot them, turn the text into speech, then put it all into a video editor. I wanted to leverage the power of python (and its many packages) to automate this process. The final goal is to have a program in which you input a link to a subreddit, and the program spits out a video. Below is a version log that will track my development of this project.
 
-
+## Version 2.5.1, August 12th, 2020
+Add CLI and sys args. 
 
 ## Version 2.5.0, August 9th, 2020
 Added clip of the channel logo along with static audio, which emuluates other popular channels who have done the same thing. [Example video](https://youtu.be/jadPcYGxwhk)
