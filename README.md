@@ -1,7 +1,7 @@
 # Automated video production
 The goal of this project is to automate the labor-intensive process of video production. There are [YouTube channels](https://www.youtube.com/c/الغازمعالحل123/feature) that only produce one kind of video: a screenshot of a 'funny' subreddit comment, and a robotic voice reading the comment. Yet some of these channels boast hundreds of thousands of subscribers. There are some [wildly successful videos](https://www.youtube.com/watch?v=aTHHvcdQ6to) with a few million views that are just 20-30 minutes of comment reading.
 
-These videos are hard to produce by hand: one must go on a subreddit and find acceptable comments, screenshot them, turn the text into speech, then put it all into a video editor. I wanted to leverage the power of python (and its many packages) to automate this process. The final goal is to have a program in which you input a link to a subreddit, and the program spits out a video. Below is a version log that will track my development of this project.
+These videos are hard to produce by hand: one must go on a subreddit and find acceptable comments, screenshot them, turn the text into speech, then put it all into a video editor. I wanted to leverage the power of python (and its many packages) to automate this process. The final goal is to have a program in which you input a link to a subreddit, and the program spits out a video. (August 13th edit: In just 2 weeks, I've already reached that goal. My new goal is to fully automate the process, from picking subreddits to posting to YouTube.) Below is a version log that will track my development of this project.
 
 ## Version 2.5.1, August 12th, 2020
 Add CLI and sys args. 
