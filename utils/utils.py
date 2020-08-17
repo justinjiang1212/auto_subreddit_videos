@@ -89,6 +89,8 @@ def crop_to_bottom(filepath: str, is_title: bool = False):
     return cropped image
     '''
     im = Image.open(filepath)
+    # Uncomment to debug is image is not cropping correctly
+    #im.show()
     if is_title:
         im_crop = im.crop(TITLE_CROP)
     else:

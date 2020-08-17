@@ -5,15 +5,15 @@ REMOVED_CHARS = ['\n', '\t', '.', '!', '-', '?', ';', ':', '[', ']', '(', ')', '
 # crop to bottom params
 # Magic numbers for title crop
 TITLE_CROP = (111, 151, 740, 330)
-# Magic numbers for bottom of comment, needs to be found manually
-# Most of the time, it's the 2nd value that needs to be changed, usually 440
-COMMENT_CROP = (122, 440, 676, 955)
+# Magic numbers for top of comment, needs to be found manually
+# Most of the time, it's the 2nd value that needs to be changed, usually 440, sometimes 403
+COMMENT_CROP = (122, 403, 676, 955)
 
 
 # find botton of comment params
 # Magic number in range may need to be adjusted, usually set to 30
 # This is how far to the right the loop starts
-X_GAP = 30
+X_GAP = 40
 # This value is usually 245, but it is sometimes 253
 COMMENT_BOX_PIXEL = 245
 

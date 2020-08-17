@@ -78,14 +78,14 @@ def main(url: str, comment_threshold: int = 100, max_comment_length: int = 30000
         counter += 1
 
         # Uncomment to debug if screenshots are not being cropped correctly
-        #break
+        break
 
     control = input("Ready to start video production? (y/n) ")
 
     if control == 'y':
         utils.make_video(counter)
     else:
-        print("When you are ready, you can run make_videos with counter = " + str(counter))
+        print("When you are ready, you can run make_video with counter = " + str(counter))
 
 
 url = sys.argv[1]
